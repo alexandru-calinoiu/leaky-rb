@@ -1,13 +1,14 @@
-GC.disable
+require "memory_profiler"
 
 an_array = []
 
-loop do
-  1000.times { an_array << "A" + "B" + "C" }
-  puts an_array.size
+report = MemoryProfiler.report do
+  11.times do
+    1000.times { an_array << "A" + "B" + "C" }
+    puts "Array is #{an_array.size} long"
+  end
 
   GC.start
-  pp ObjectSpace.count_objects
-
-  sleep 1
 end
+
+report.pretty_print
