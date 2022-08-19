@@ -7,7 +7,7 @@ loop do
   puts an_array.size
 
   GC.start
-  puts "There are #{GC.stat(:heap_live_slots)} live objects"
+  pp ObjectSpace.count_objects
 
   sleep 1
 end
